@@ -1,0 +1,26 @@
+name: prides
+description: A package that helps in creating and Presenting Slides.
+version: 0.0.1-dev.1
+# homepage:
+repository: https://github.com/immadisairaj/prides
+issue_tracker: https://github.com/immadisairaj/prides/issues
+
+environment:
+  sdk: '>=2.19.0 <4.0.0'
+  flutter: ">=3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  
+  # This is a package from dart.dev that contains annotations like
+  # @internal that is used by the Flutter tool to analyze code.
+  meta: ^1.8.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  # This package is from very good ventures that contains lints
+  # for some good practices while writing code.
+  very_good_analysis: ^4.0.0
