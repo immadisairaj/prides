@@ -1,6 +1,6 @@
-<!-- <p align="center">
-    <img src="https://raw.githubusercontent.com/immadisairaj/prides/main/assets/prides_full.png" height="150">
-</p> -->
+<p align="center">
+    <img src="https://raw.githubusercontent.com/immadisairaj/prides/main/assets/prides_full.png">
+</p>
 <h1 align="center">Prides</h1>
 <p align="center">
     A package that helps in creating and Presenting Slides.
