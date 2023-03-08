@@ -18,9 +18,11 @@ jobs:
   package_scores:
     # A reusable workflow for verifying package scores on pub.dev
     uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/pana.yml@v1
-    # default score is 120
+    with:
+      min_score: 130 # always have max score
   
   flutter_package:
     # A reusable workflow for Flutter packages
     uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/flutter_package.yml@v1
-    # default coverage is 100
+    with:
+      min_coverage: 100 # always have max coverage

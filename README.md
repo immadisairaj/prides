@@ -3,7 +3,7 @@
 </p>
 <h1 align="center">Prides</h1>
 <p align="center">
-    A package that helps in creating and Presenting Slides.
+    A package that helps in creating custom Slides and Presenting them.
 </p>
 <p align="center">
     <a title="Pub" href="https://pub.dev/packages/prides">

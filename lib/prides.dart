@@ -1,4 +1,4 @@
-/// A package that helps in creating and Presenting Slides.
+/// A package that helps in creating custom Slides and Presenting them.
 library prides;
 
 /// Offers the `PresentationWidget`.
