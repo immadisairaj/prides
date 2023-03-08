@@ -29,6 +29,7 @@ Use this package to build your presentations with Flutter with ease. Use the pre
 ### Presentation Features
 
 Event controls provided by the widget:
+
 | Event | Advance Slide | Reverse Slide |
 | - | - | - |
 | Key Event | `->` (right arrow) | `<-` (left arrow) |
