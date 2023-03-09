@@ -1,4 +1,4 @@
-## 0.0.1-dev.5
+## 0.0.1-dev.6
 
 - add `TitleSlide` widget
 - fix example environment for zapp to import
