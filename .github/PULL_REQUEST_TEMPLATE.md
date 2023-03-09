@@ -27,9 +27,9 @@
 
 <!-- Tick all applicable checkbox by with `[x]` else mark it with `[-]`-->
 
-- [ ] Updated/Added the relavent tests and checked them before PR
+- [ ] Updated/Added the relevant tests and checked them before PR
 - [ ] Updated/Added all the documentation changes
-- [ ] Updated/Added the relavent examples in the `/examples` folder
+- [ ] Updated/Added the relevant examples in the `/examples` folder
 
 ## Breaking Change
 
