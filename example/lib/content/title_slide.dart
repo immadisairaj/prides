@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:prides/prides.dart';
 
-class TitleSlide extends SlideWidget {
-  const TitleSlide({super.key});
+class CustomTitleSlide extends SlideWidget {
+  const CustomTitleSlide({super.key});
 
   @override
   Widget? background() {

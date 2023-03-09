@@ -1,3 +1,8 @@
+## 0.0.1-dev.5
+
+- add `TitleSlide` widget
+- fix example environment for zapp to import
+
 ## 0.0.1-dev.4
 
 - update description to meet conventions

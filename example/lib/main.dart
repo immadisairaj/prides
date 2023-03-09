@@ -27,7 +27,15 @@ class MyHomePage extends StatelessWidget {
           color: Color.fromARGB(255, 113, 61, 173),
         ), // a one color background for whole presentation
         slides: [
-          const TitleSlide(), // slide in content/title_slide.dart
+          const CustomTitleSlide(), // slide in content/title_slide.dart
+          const TitleSlide(
+            title: Text('Title Slide'),
+            subtitle: Text('This is a templete slide'),
+          ),
+          const TitleSlide.fromText(
+            title: 'Title Slide',
+            subtitle: 'This is a templete slide using fromText()',
+          ),
           const ExampleSlide(
             text: 'Slide with no background',
           ), // custom slide with no background
