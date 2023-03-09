@@ -2,26 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:prides/prides.dart';
 
-void main() {
-  Future<void> pumpApp(
-    WidgetTester tester,
-    Widget widget,
-  ) async {
-    await tester.pumpWidget(
-      MaterialApp(
-        home: Material(
-          child: widget,
-        ),
-      ),
-    );
-  }
+import 'widgets_test_helper.dart';
 
+void main() {
   testWidgets('simple slide test', (tester) async {
     const slideKey = Key('slideWidget');
     final slide = Container(key: slideKey);
     const backgroundKey = Key('backgroundWidget');
     final background = Container(key: backgroundKey);
-    await pumpApp(tester, SimpleSlide(slide: slide, background: background));
+    await WidgetsTestHelper.pumpApp(
+      tester,
+      SimpleSlide(slide: slide, background: background),
+    );
 
     // Expect: slide and background widgets
     expect(find.byKey(slideKey), findsOneWidget);

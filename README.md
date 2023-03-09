@@ -40,6 +40,7 @@ Event controls provided by the widget:
 **Pre-built slides that can be used directly:**
 
 - `SimpleSlide`: removes abstraction of the `SlideWidget`.
+- `TitleSlide`: common title slide template containing `title` and `subtitle`.
 
 > More widgets to come in the upcoming releases.
 
@@ -184,6 +185,20 @@ SimpleSlide:
 SimpleSlide(
     slide: ForegroundWidget(), // required
     background: BackgroundWidget(),
+),
+```
+
+TitleSlide:
+```dart
+TitleSlide(
+    title: TitleWidget(),
+    subtitle: SubtitleWidget(),
+),
+
+// Use this constructor if you want to pass only strings
+TitleSlide.fromText(
+    title: 'Title',
+    subtitle: 'Subtitle',
 ),
 ```
 
