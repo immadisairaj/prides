@@ -36,6 +36,12 @@ class MyHomePage extends StatelessWidget {
             title: 'Title Slide',
             subtitle: 'This is a templete slide using fromText()',
           ),
+          const SectionHeader(
+            title: Text('Section Header slide'),
+          ),
+          const SectionHeader.fromText(
+            title: 'Section Header (fromText)',
+          ),
           const ExampleSlide(
             text: 'Slide with no background',
           ), // custom slide with no background
