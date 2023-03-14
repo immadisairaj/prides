@@ -41,6 +41,7 @@ Event controls provided by the widget:
 
 - `SimpleSlide`: removes abstraction of the `SlideWidget`.
 - `TitleSlide`: common title slide template containing `title` and `subtitle`.
+- `SectionHeader`: common section header template containing only `title`.
 
 > More widgets to come in the upcoming releases.
 
@@ -200,6 +201,14 @@ TitleSlide.fromText(
     title: 'Title',
     subtitle: 'Subtitle',
 ),
+```
+
+SectionHeader:
+```dart
+SectionHeader(title: TitleWidget()),
+
+// Use this constructor if you want to pass only string
+SectionHeader.fromText(title: 'Title'),
 ```
 
 You can have a look at the package default [example](https://github.com/immadisairaj/prides/tree/main/example) directory that contains an example with detailed usage of the widgets.

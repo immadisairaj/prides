@@ -8,38 +8,32 @@ void main() {
   const titleKey = Key('titleWidget');
   final title = Container(key: titleKey);
   const titleText = 'Title';
-  const subtitleKey = Key('subtitleWidget');
-  final subtitle = Container(key: subtitleKey);
-  const subtitleText = 'Subtitle';
   const backgroundKey = Key('backgroundWidget');
   final background = Container(key: backgroundKey);
 
-  group('title slide test', () {
+  group('section header slide test', () {
     testWidgets('with default constructor', (tester) async {
       await WidgetsTestHelper.pumpApp(
         tester,
-        TitleSlide(title: title, subtitle: subtitle, background: background),
+        SectionHeader(title: title, background: background),
       );
 
-      // Expect: title, subtitle and background widgets
+      // Expect: title and background widgets
       expect(find.byKey(titleKey), findsOneWidget);
-      expect(find.byKey(subtitleKey), findsOneWidget);
       expect(find.byKey(backgroundKey), findsOneWidget);
     });
 
     testWidgets('with fromText constructor', (tester) async {
       await WidgetsTestHelper.pumpApp(
         tester,
-        TitleSlide.fromText(
+        SectionHeader.fromText(
           title: titleText,
-          subtitle: subtitleText,
           background: background,
         ),
       );
 
-      // Expect: title text, subtitle text and background widgets
+      // Expect: title text and background widgets
       expect(find.text(titleText), findsOneWidget);
-      expect(find.text(subtitleText), findsOneWidget);
       expect(find.byKey(backgroundKey), findsOneWidget);
     });
   });
