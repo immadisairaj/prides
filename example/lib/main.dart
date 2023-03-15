@@ -58,6 +58,12 @@ class MyHomePage extends StatelessWidget {
                 Container(color: const Color.fromARGB(255, 90, 155, 180)),
           ),
           const CounterSlide(),
+          const BlankSlide(
+            background: ColoredBox(
+              color: Colors.green,
+              child: Text('Blank Slide - This text is from background'),
+            ),
+          ),
           const ExampleSlide(
             text: 'Flutter is Awesome!',
             backgroundColor: Colors.blue,
