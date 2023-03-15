@@ -42,6 +42,7 @@ Event controls provided by the widget:
 - `SimpleSlide`: removes abstraction of the `SlideWidget`.
 - `TitleSlide`: common title slide template containing `title` and `subtitle`.
 - `SectionHeader`: common section header template containing only `title`.
+- `BlankSlide`: a blank slide that only allows option for background widget.
 
 > More widgets to come in the upcoming releases.
 
@@ -201,6 +202,14 @@ TitleSlide.fromText(
     title: 'Title',
     subtitle: 'Subtitle',
 ),
+```
+
+BlankSlide:
+```dart
+BlankSlide(),
+
+// use this if you want to show a unique background
+BlankSlide(background: BackgroundWidget()),
 ```
 
 SectionHeader:
