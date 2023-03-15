@@ -47,7 +47,8 @@ abstract class SlideWidget extends StatelessWidget {
   /// Override this method.
   ///
   /// This widget returned by this method will be placed as background
-  /// of that particular slide.
+  /// of that particular slide. Background is wrapped inside
+  /// a [SizedBox.expand] widget so that it stretches to the whole.
   ///
   /// If this method returns null, then the background widget will be empty
   /// i.e. there will be an empty [SizedBox.expand] instead.
@@ -83,7 +84,9 @@ abstract class SlideWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        background() ?? const SizedBox.expand(),
+        SizedBox.expand(
+          child: background(),
+        ),
         slide(context),
       ],
     );
