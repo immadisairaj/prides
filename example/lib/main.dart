@@ -64,6 +64,9 @@ class MyHomePage extends StatelessWidget {
               child: Text('Blank Slide - This text is from background'),
             ),
           ),
+          const BackgroundlessSlide(
+            slide: Center(child: Text('Backgroundless Slide')),
+          ),
           const ExampleSlide(
             text: 'Flutter is Awesome!',
             backgroundColor: Colors.blue,

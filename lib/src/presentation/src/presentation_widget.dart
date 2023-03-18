@@ -30,8 +30,13 @@ import 'package:prides/src/slide/widgets/end_slide.dart';
 ///
 /// *screen here is the area where this widget is displayed.
 ///
-/// Note: It is recomended to use this widget as a complete page
+/// Note1: It is recomended to use this widget as a complete page
 /// as the presentations are usually full screen.
+///
+/// Note2: When a slide doesn't have a background, this widget's background
+/// is considered. And, when this widget doesn't have a background, it will be
+/// like the background is transparent and previous slide will be displayed
+/// due the the usage of stack for slides.
 ///
 /// See also:
 /// * [SlideWidget], a widget that can be used to create a slide.
