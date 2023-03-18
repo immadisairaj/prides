@@ -1,3 +1,9 @@
+## 0.0.1-dev.7
+
+- addition of `SectionHeader`, `BlankSlide` and `BackgroundSlide`
+- `TitleSlide` now requires `subtitle` which was optional before.
+- `SlideWidget`'s `background` now is now wrapped inside a `SizedBox.expand`. This is because, we should not have a partial background slide when widgets like text are passed inside a coloured box or container.
+
 ## 0.0.1-dev.6
 
 - add `TitleSlide` widget
