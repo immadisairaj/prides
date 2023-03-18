@@ -10,13 +10,20 @@ void main() {
     final slide = Container(key: slideKey);
     const backgroundKey = Key('backgroundWidget');
     final background = Container(key: backgroundKey);
-    await WidgetsTestHelper.pumpApp(
-      tester,
-      SimpleSlide(slide: slide, background: background),
-    );
+    final widget = SimpleSlide(slide: slide, background: background);
+    await WidgetsTestHelper.pumpApp(tester, widget);
 
     // Expect: slide and background widgets
     expect(find.byKey(slideKey), findsOneWidget);
     expect(find.byKey(backgroundKey), findsOneWidget);
+
+    // Expect: slide
+    final context = WidgetsTestHelper.mockContext(tester);
+    final slideResult = widget.slide(context);
+    expect(slideResult, slide);
+
+    // Expect: backgrund
+    final backgroundResult = widget.background();
+    expect(backgroundResult, background);
   });
 }
