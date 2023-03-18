@@ -8,12 +8,19 @@ void main() {
   testWidgets('backgroundless slide test', (tester) async {
     const slideKey = Key('slideWidget');
     final slide = Container(key: slideKey);
-    await WidgetsTestHelper.pumpApp(
-      tester,
-      BackgroundlessSlide(slide: slide),
-    );
+    final widget = BackgroundlessSlide(slide: slide);
+    await WidgetsTestHelper.pumpApp(tester, widget);
 
-    // Expect: background widget
+    // Expect: slide widget
     expect(find.byKey(slideKey), findsOneWidget);
+
+    // Expect: slide
+    final context = WidgetsTestHelper.mockContext(tester);
+    final slideResult = widget.slide(context);
+    expect(slideResult, slide);
+
+    // Expect: backgrund to be null
+    final backgroundResult = widget.background();
+    expect(backgroundResult, null);
   });
 }
