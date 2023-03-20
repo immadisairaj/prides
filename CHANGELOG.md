@@ -1,3 +1,8 @@
+## 0.0.1-dev.8
+
+- removes `BackgroundlessSlide` that can be replaced with `SimpleSlide` without passing any `background`.
+- Change the way the slides are displayed in stack. (Previous slides are transparent)s.
+
 ## 0.0.1-dev.7
 
 - addition of `SectionHeader`, `BlankSlide` and `BackgroundSlide`
