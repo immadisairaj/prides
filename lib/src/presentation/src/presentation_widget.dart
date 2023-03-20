@@ -8,7 +8,7 @@ import 'package:prides/src/slide/widgets/end_slide.dart';
 ///
 /// It is as simple as just passing the list of slides to be displayed
 /// to the [slides] in the required order. We can also pass (optional) a widget
-/// to [background] that can be displayed when a slide doesn't have
+/// to [background] that is displayed when a slide doesn't have
 /// a background. This enables use of a common background all over
 /// the presentation.
 ///
@@ -34,9 +34,8 @@ import 'package:prides/src/slide/widgets/end_slide.dart';
 /// as the presentations are usually full screen.
 ///
 /// Note2: When a slide doesn't have a background, this widget's background
-/// is considered. And, when this widget doesn't have a background, it will be
-/// like the background is transparent and previous slide will be displayed
-/// due the the usage of stack for slides.
+/// is considered. And, when this widget doesn't have a background, the
+/// default flutter app background is displayed (white or black based on theme).
 ///
 /// See also:
 /// * [SlideWidget], a widget that can be used to create a slide.
@@ -166,33 +165,34 @@ class _PresentationWidgetState extends State<PresentationWidget> {
           onTapDown: _onTapDownEvent,
           child: Stack(
             children: List<Widget>.generate(
-              widget.slides.length + 1, // +1 for end slide
+              widget.slides.length + 2, // +2 for background and end slide
               (index) {
                 // if the slide position is later to the current slide,
                 // we return a blank widget to display nothing.
-                if (index > _currentSlide) {
+                if (index - 1 > _currentSlide) {
                   return const SizedBox.shrink();
                 }
                 // show the end slide after all the slides (topmost)
-                if (index == widget.slides.length) {
+                if (index - 1 == widget.slides.length) {
                   // end of the presentation
                   return const EndSlide(
                     key: ValueKey('EndSlide'),
                   );
                 }
+                // show the presentation background at
+                // the bottom most in the stack
+                if (index == 0) {
+                  return SizedBox.expand(child: widget.background);
+                }
                 // if slide position is before to the current slide,
                 // we add the widges in stack on top of another with
-                // the current slide being at the top.
-                final hasBackground = widget.slides[index].hasBackground;
+                // the current slide being at the top, them being transparent.
                 return Stack(
                   children: [
-                    // if slide has no background, use presentation background
-                    if (!hasBackground)
-                      // background widget if specified expands to the parent
-                      SizedBox.expand(
-                        child: widget.background,
-                      ),
-                    widget.slides[index],
+                    Opacity(
+                      opacity: _currentSlide == index - 1 ? 1 : 0,
+                      child: widget.slides[index - 1],
+                    ),
                   ],
                 );
               },

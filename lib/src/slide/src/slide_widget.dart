@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 import 'package:prides/prides.dart';
 
 /// An abstract class helpful to create a Slide
@@ -38,14 +37,14 @@ abstract class SlideWidget extends StatelessWidget {
   /// Initializes [key] for subclasses.
   const SlideWidget({super.key});
 
-  /// Override this method.
+  /// Override this method to add slide (foreground) widget.
   ///
   /// The widget returned by this method will be placed as foreground
   /// of that particular slide.
   // @mustBeOverridden
   Widget slide(BuildContext context);
 
-  /// Override this method.
+  /// Override this method to add background widget.
   ///
   /// This widget returned by this method will be placed as background
   /// of that particular slide. Background is wrapped inside
@@ -55,14 +54,6 @@ abstract class SlideWidget extends StatelessWidget {
   /// i.e. there will be an empty [SizedBox.expand] instead.
   // @mustBeOverridden
   Widget? background();
-
-  /// Returns true if the widget from [background] is not null.
-  ///
-  /// [PresentationWidget] uses this method to check if the slide has
-  /// a background. If there is no background, then the [PresentationWidget]
-  /// will show [PresentationWidget.background] as a background to the slide.
-  @nonVirtual
-  bool get hasBackground => background() != null;
 
   /// Override this method. (optional)
   ///
