@@ -261,4 +261,34 @@ void main() {
       expect(find.byType(MockSlideWidgetWithController), findsNothing);
     },
   );
+
+  testWidgets(
+    'Previous slide is transparent',
+    (tester) async {
+      const slideOneKey = Key('slideOne');
+      const slideTwoKey = Key('slideTwo');
+      const slideOne = MockSlideWidget(key: slideOneKey);
+      const slideTwo = MockSlideWidget(key: slideTwoKey);
+      final presentationWidget = PresentationWidget(
+        slides: const [slideOne, slideTwo],
+      );
+      await pumpApp(tester, presentationWidget);
+
+      // advance - go to the second slide
+      await tester.tap(find.byType(PresentationWidget));
+      await tester.pumpAndSettle();
+
+      // Expect: opacity of previous slide is 0 and current slide is 1
+      final parentOpacityOne = find.ancestor(
+        of: find.byWidget(slideOne),
+        matching: find.byType(Opacity),
+      );
+      final parentOpacityTwo = find.ancestor(
+        of: find.byWidget(slideTwo),
+        matching: find.byType(Opacity),
+      );
+      expect(tester.widget<Opacity>(parentOpacityOne).opacity, 0);
+      expect(tester.widget<Opacity>(parentOpacityTwo).opacity, 1);
+    },
+  );
 }
