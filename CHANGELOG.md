@@ -1,3 +1,7 @@
+## 0.0.1
+
+- Initial public release.
+
 ## 0.0.1-dev.8
 
 - removes `BackgroundlessSlide` that can be replaced with `SimpleSlide` without passing any `background`.
