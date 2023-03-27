@@ -26,9 +26,9 @@ class MyHomePage extends StatelessWidget {
         background: const ColoredBox(
           color: Color.fromARGB(255, 113, 61, 173),
         ), // a one color background for whole presentation
-        onSlideChange: (value) {
-          debugPrint('currentSlide: ${value.data.slide}, '
-              'previousSlide: ${value.data.previousSlide}');
+        onSlideChange: (data) {
+          debugPrint('currentSlide: ${data.slide}, '
+              'previousSlide: ${data.previousSlide}');
         },
         slides: [
           const CustomTitleSlide(), // slide in content/title_slide.dart

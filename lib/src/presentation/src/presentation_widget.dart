@@ -58,7 +58,20 @@ class PresentationWidget extends StatefulWidget {
   /// It will displayed when a slide doesn't have a background.
   final Widget? background;
 
-  final ValueChanged<SlideChangeEvent>? onSlideChange;
+  /// An event callback when a slide is changed. The data passed in this
+  /// callback is [SlideChangeData]. The callback happens only when
+  /// a slide is changed. The index of slides start from 1.
+  /// current slide value is (slidesLength + 1) when reaching the
+  /// end of the presentation slide.
+  ///
+  /// Usage:
+  /// ```dart
+  /// PresentationWidget(
+  ///   onSlideChange: (data) => doSomething,
+  ///   slides: [...],
+  /// ),
+  /// ```
+  final ValueChanged<SlideChangeData>? onSlideChange;
 
   @override
   State<PresentationWidget> createState() => _PresentationWidgetState();
@@ -78,7 +91,8 @@ class _PresentationWidgetState extends State<PresentationWidget> {
   void _initialize() {
     _currentSlide = ValueNotifier(0);
     _focusNode = FocusNode();
-    slideChangeData = SlideChangeData(slide: _currentSlide.value);
+    // + 1 is for the index to start from 1
+    slideChangeData = SlideChangeData(slide: _currentSlide.value + 1);
     _currentSlide.addListener(_slideChangeListener);
   }
 
@@ -97,9 +111,10 @@ class _PresentationWidgetState extends State<PresentationWidget> {
   }
 
   void _slideChangeListener() {
-    slideChangeData.slide = _currentSlide.value;
+    // + 1 is for the index to start from 1
+    slideChangeData.slide = _currentSlide.value + 1;
     if (widget.onSlideChange != null) {
-      widget.onSlideChange!.call(SlideChangeEvent(data: slideChangeData));
+      widget.onSlideChange!.call(slideChangeData);
     }
   }
 
