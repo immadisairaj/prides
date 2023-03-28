@@ -291,4 +291,28 @@ void main() {
       expect(tester.widget<Opacity>(parentOpacityTwo).opacity, 1);
     },
   );
+
+  testWidgets(
+    'slide change callback',
+    (tester) async {
+      late int currentSlide;
+      late int previousSlide;
+      final presentationWidget = PresentationWidget(
+        slides: const [MockSlideWidget(), MockSlideWidget()],
+        onSlideChange: (value) {
+          currentSlide = value.slide;
+          previousSlide = value.previousSlide!;
+        },
+      );
+      await pumpApp(tester, presentationWidget);
+
+      // advance - go to the second slide
+      await tester.tap(find.byType(PresentationWidget));
+      await tester.pumpAndSettle();
+
+      // Expect the current slide and previous slide
+      expect(currentSlide, 2);
+      expect(previousSlide, 1);
+    },
+  );
 }

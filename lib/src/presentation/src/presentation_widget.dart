@@ -48,6 +48,7 @@ class PresentationWidget extends StatefulWidget {
     required this.slides,
     super.key,
     this.background,
+    this.onSlideChange,
   }) : assert(slides.length > 0, 'slides cannot be empty');
 
   /// The list of slides made from or using [SlideWidget] to present.
@@ -56,6 +57,21 @@ class PresentationWidget extends StatefulWidget {
   /// The background widget for the presentation.
   /// It will displayed when a slide doesn't have a background.
   final Widget? background;
+
+  /// An event callback when a slide is changed. The data passed in this
+  /// callback is [SlideChangeData]. The callback happens only when
+  /// a slide is changed. The index of slides start from 1.
+  /// current slide value is (slidesLength + 1) when reaching the
+  /// end of the presentation slide.
+  ///
+  /// Usage:
+  /// ```dart
+  /// PresentationWidget(
+  ///   onSlideChange: (data) => doSomething,
+  ///   slides: [...],
+  /// ),
+  /// ```
+  final ValueChanged<SlideChangeData>? onSlideChange;
 
   @override
   State<PresentationWidget> createState() => _PresentationWidgetState();
@@ -66,19 +82,40 @@ class _PresentationWidgetState extends State<PresentationWidget> {
   ///
   /// it advances or reverses from the methods
   /// [_advanceSlide] and [_reverseSlide] respectively.
-  late int _currentSlide;
+  late ValueNotifier<int> _currentSlide;
 
   late FocusNode _focusNode;
 
+  late SlideChangeData slideChangeData;
+
   void _initialize() {
-    _currentSlide = 0;
+    _currentSlide = ValueNotifier(0);
     _focusNode = FocusNode();
+    // + 1 is for the index to start from 1
+    slideChangeData = SlideChangeData(slide: _currentSlide.value + 1);
+    _currentSlide.addListener(_slideChangeListener);
   }
 
   @override
   void initState() {
     super.initState();
     _initialize();
+  }
+
+  @override
+  void dispose() {
+    _currentSlide
+      ..removeListener(_slideChangeListener)
+      ..dispose();
+    super.dispose();
+  }
+
+  void _slideChangeListener() {
+    // + 1 is for the index to start from 1
+    slideChangeData.slide = _currentSlide.value + 1;
+    if (widget.onSlideChange != null) {
+      widget.onSlideChange!.call(slideChangeData);
+    }
   }
 
   /// increases the [_currentSlide] by 1
@@ -88,8 +125,8 @@ class _PresentationWidgetState extends State<PresentationWidget> {
   /// - if it returns true, it will stop the slide from advancing.
   /// - if it returns false, it will advance the slide normally.
   void _advanceSlide() {
-    if (_currentSlide < widget.slides.length) {
-      final controller = widget.slides[_currentSlide].controller;
+    if (_currentSlide.value < widget.slides.length) {
+      final controller = widget.slides[_currentSlide.value].controller;
       if (controller != null) {
         final stopAdvance = controller.advanceSlide();
         if (stopAdvance) {
@@ -97,7 +134,7 @@ class _PresentationWidgetState extends State<PresentationWidget> {
         }
       }
       setState(() {
-        _currentSlide++;
+        _currentSlide.value++;
       });
     }
   }
@@ -109,9 +146,9 @@ class _PresentationWidgetState extends State<PresentationWidget> {
   /// - if it returns true, it will stop the slide from reversing.
   /// - if it returns false, it will reverse the slide normally.
   void _reverseSlide() {
-    if (_currentSlide > 0) {
-      if (_currentSlide < widget.slides.length) {
-        final controller = widget.slides[_currentSlide].controller;
+    if (_currentSlide.value > 0) {
+      if (_currentSlide.value < widget.slides.length) {
+        final controller = widget.slides[_currentSlide.value].controller;
         if (controller != null) {
           final stopReverse = controller.reverseSlide();
           if (stopReverse) {
@@ -120,7 +157,7 @@ class _PresentationWidgetState extends State<PresentationWidget> {
         }
       }
       setState(() {
-        _currentSlide--;
+        _currentSlide.value--;
       });
     }
   }
@@ -169,7 +206,7 @@ class _PresentationWidgetState extends State<PresentationWidget> {
               (index) {
                 // if the slide position is later to the current slide,
                 // we return a blank widget to display nothing.
-                if (index - 1 > _currentSlide) {
+                if (index - 1 > _currentSlide.value) {
                   return const SizedBox.shrink();
                 }
                 // show the end slide after all the slides (topmost)
@@ -190,7 +227,7 @@ class _PresentationWidgetState extends State<PresentationWidget> {
                 return Stack(
                   children: [
                     Opacity(
-                      opacity: _currentSlide == index - 1 ? 1 : 0,
+                      opacity: _currentSlide.value == index - 1 ? 1 : 0,
                       child: widget.slides[index - 1],
                     ),
                   ],
