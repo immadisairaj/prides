@@ -61,6 +61,12 @@ class MyHomePage extends StatelessWidget {
             background:
                 Container(color: const Color.fromARGB(255, 90, 155, 180)),
           ),
+          const CaptionSlide(
+            caption: Text('Caption Slide'),
+          ),
+          const CaptionSlide.fromText(
+            caption: 'Caption Slide (fromText)',
+          ),
           const CounterSlide(),
           const BlankSlide(
             background: ColoredBox(

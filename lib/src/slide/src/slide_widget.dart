@@ -33,6 +33,7 @@ import 'package:prides/prides.dart';
 /// * [TitleSlide], a template slide that takes title and subtitle as input.
 /// * [SectionHeader], a template slide that takes in just title as input.
 /// * [BlankSlide], a template slide that is blank without any foreground.
+/// * [CaptionSlide], a template slide that is used for captions.
 abstract class SlideWidget extends StatelessWidget {
   /// Initializes [key] for subclasses.
   const SlideWidget({super.key});

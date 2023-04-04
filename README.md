@@ -43,6 +43,7 @@ Event controls provided by the widget:
 - `TitleSlide`: common title slide template containing `title` and `subtitle`.
 - `SectionHeader`: common section header template containing only `title`.
 - `BlankSlide`: a slide that only allows option for background widget.
+- `CaptionSlide`: slide that can be used for captions (left bottom text).
 
 > More widgets to come in the upcoming releases.
 
@@ -218,6 +219,14 @@ BlankSlide(),
 
 // use this if you want to show a unique background
 BlankSlide(background: BackgroundWidget()),
+```
+
+CaptionSlide:
+```dart
+CaptionSlide(caption: CaptionWidget()),
+
+// use this if you want to pass only string
+CaptionSlide.fromText(caption: 'Caption'),
 ```
 
 You can have a look at the package default [example](https://github.com/immadisairaj/prides/tree/main/example) directory that contains an example with detailed usage of the widgets.
