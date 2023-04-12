@@ -23,7 +23,7 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       child: PresentationWidget(
-        ShowCurrentSlideNumber: true,
+        ShowCurrentSlideNumber: true ,
         
         
         background: const ColoredBox(
