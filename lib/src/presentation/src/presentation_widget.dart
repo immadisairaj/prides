@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:prides/prides.dart';
-
 import 'package:prides/src/slide/widgets/end_slide.dart';
 
 /// A widget that can present the slides.
@@ -76,7 +75,6 @@ class PresentationWidget extends StatefulWidget {
   /// ),
   /// ```
   final ValueChanged<SlideChangeData>? onSlideChange;
-
   @override
   State<PresentationWidget> createState() => _PresentationWidgetState();
 }
@@ -87,11 +85,8 @@ class _PresentationWidgetState extends State<PresentationWidget> {
   /// it advances or reverses from the methods
   /// [_advanceSlide] and [_reverseSlide] respectively.
   late ValueNotifier<int> _currentSlide;
-
   late FocusNode _focusNode;
-
   late SlideChangeData slideChangeData;
-
   void _initialize() {
     _currentSlide = ValueNotifier(0);
     _focusNode = FocusNode();
@@ -242,9 +237,10 @@ class _PresentationWidgetState extends State<PresentationWidget> {
                 // and the current slide is not the end slide
                 // Adding it to the stack so that it is always on top
                 [
-                  widget.ShowCurrentSlideNumber == true&&_currentSlide.value < widget.slides.length
+                  widget.ShowCurrentSlideNumber == true &&
+                          _currentSlide.value < widget.slides.length
                       ? Container(
-                        margin: EdgeInsets.only(bottom: 20),
+                          margin: EdgeInsets.only(bottom: 20),
                           alignment: Alignment.bottomCenter,
                           child: Text(
                             '${_currentSlide.value + 1}/${widget.slides.length}',
