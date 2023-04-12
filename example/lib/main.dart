@@ -4,7 +4,6 @@ import './content/content.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -18,13 +17,11 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Material(
       child: PresentationWidget(
         ShowCurrentSlideNumber: true,
-
         background: const ColoredBox(
           color: Color.fromARGB(255, 113, 61, 173),
         ), // a one color background for whole presentation
