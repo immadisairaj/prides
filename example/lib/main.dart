@@ -21,7 +21,7 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       child: PresentationWidget(
-        ShowCurrentSlideNumber: true,
+        showSlideNumber: true,
         background: const ColoredBox(
           color: Color.fromARGB(255, 113, 61, 173),
         ), // a one color background for whole presentation

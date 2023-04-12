@@ -193,6 +193,19 @@ void main() {
     // the slide has no background
     expect(find.byKey(backgroundKey), findsOneWidget);
   });
+  testWidgets(
+      'Display the slide number if set to true',
+      (tester) async {
+    const backgroundKey = Key('backgroundWidget');
+    final presentationWidget = PresentationWidget(
+      slides: const [MockSlideWidgetNoBackground()],
+      showSlideNumber: true,
+    );
+    await pumpApp(tester, presentationWidget);
+
+    // Expect: a slide number widget
+    expect(find.byType(Align), findsOneWidget);
+  });
 
   testWidgets(
     'Navigate the PresentationWidget when a slide is having controller',
