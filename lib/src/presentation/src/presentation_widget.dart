@@ -232,13 +232,9 @@ class _PresentationWidgetState extends State<PresentationWidget> {
                     // we add the widges in stack on top of another with
                     // the current slide being at the top, them being 
                     // transparent
-                    return Stack(
-                      children: [
-                        Opacity(
-                          opacity: _currentSlide.value == index - 1 ? 1 : 0,
-                          child: widget.slides[index - 1],
-                        ),
-                      ],
+                    return Opacity(
+                      opacity: _currentSlide.value == index - 1 ? 1 : 0,
+                      child: widget.slides[index - 1],
                     );
                   },
                 ) +
