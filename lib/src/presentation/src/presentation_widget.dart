@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:prides/prides.dart';
+
 import 'package:prides/src/slide/widgets/end_slide.dart';
 
 /// A widget that can present the slides.
@@ -10,7 +11,7 @@ import 'package:prides/src/slide/widgets/end_slide.dart';
 /// to [background] that is displayed when a slide doesn't have
 /// a background. This enables use of a common background all over
 /// the presentation.
-/// to [showSlideNumber] to show the current slide number.
+/// To show the current slide number, set the [showSlideNumber] to true.
 ///
 /// It is best to use a [Material] widget as a parent of this widget.
 /// And always use this widget inside a [MaterialApp].
@@ -37,8 +38,9 @@ import 'package:prides/src/slide/widgets/end_slide.dart';
 /// is considered. And, when this widget doesn't have a background, the
 /// default flutter app background is displayed (white or black based on theme).
 ///
-/// Note3: Currently using textTheme.labelLarge in the slide number
-/// 
+/// Note3:  Text when the current slide number is displayed uses the 
+/// [TextTheme.labelLarge] style.
+
 /// See also:
 /// * [SlideWidget], a widget that can be used to create a slide.
 /// The list of this widget is passed to [slides] in [PresentationWidget].
@@ -57,7 +59,7 @@ class PresentationWidget extends StatefulWidget {
   /// The list of slides made from or using [SlideWidget] to present.
   final List<SlideWidget> slides;
 
-  /// Show the current slide number when is to true
+  /// Show the current slide number when set to true
   final bool showSlideNumber;
 
   /// The background widget for the presentation.
@@ -88,8 +90,11 @@ class _PresentationWidgetState extends State<PresentationWidget> {
   /// it advances or reverses from the methods
   /// [_advanceSlide] and [_reverseSlide] respectively.
   late ValueNotifier<int> _currentSlide;
+
   late FocusNode _focusNode;
+
   late SlideChangeData slideChangeData;
+  
   void _initialize() {
     _currentSlide = ValueNotifier(0);
     _focusNode = FocusNode();
@@ -225,7 +230,8 @@ class _PresentationWidgetState extends State<PresentationWidget> {
                     }
                     // if slide position is before to the current slide,
                     // we add the widges in stack on top of another with
-                    // the current slide being at the top, them being transparent.
+                    // the current slide being at the top, them being 
+                    // transparent
                     return Stack(
                       children: [
                         Opacity(
@@ -240,7 +246,7 @@ class _PresentationWidgetState extends State<PresentationWidget> {
                 // and the current slide is not the end slide
                 // Adding it to the stack so that it is always on top
                 [
-                  if (widget.showSlideNumber == true &&
+                  if (widget.showSlideNumber &&
                       _currentSlide.value < widget.slides.length)
                     Align(
                       alignment: Alignment.bottomCenter,
@@ -248,7 +254,6 @@ class _PresentationWidgetState extends State<PresentationWidget> {
                         padding: const EdgeInsets.only(bottom: 20),
                         child: Text(
                           '${_currentSlide.value + 1}',
-                          //
                           style: Theme.of(context).textTheme.labelLarge,
                         ),
                       ),
