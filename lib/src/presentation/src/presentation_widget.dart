@@ -49,6 +49,7 @@ class PresentationWidget extends StatefulWidget {
     super.key,
     this.background,
     this.onSlideChange,
+    // Todo(immadisairaj): try to add an option for ratio, free size
   }) : assert(slides.length > 0, 'slides cannot be empty');
 
   /// The list of slides made from or using [SlideWidget] to present.
@@ -200,39 +201,50 @@ class _PresentationWidgetState extends State<PresentationWidget> {
         onKey: _onKeyEvent,
         child: GestureDetector(
           onTapDown: _onTapDownEvent,
-          child: Stack(
-            children: List<Widget>.generate(
-              widget.slides.length + 2, // +2 for background and end slide
-              (index) {
-                // if the slide position is later to the current slide,
-                // we return a blank widget to display nothing.
-                if (index - 1 > _currentSlide.value) {
-                  return const SizedBox.shrink();
-                }
-                // show the end slide after all the slides (topmost)
-                if (index - 1 == widget.slides.length) {
-                  // end of the presentation
-                  return const EndSlide(
-                    key: ValueKey('EndSlide'),
-                  );
-                }
-                // show the presentation background at
-                // the bottom most in the stack
-                if (index == 0) {
-                  return SizedBox.expand(child: widget.background);
-                }
-                // if slide position is before to the current slide,
-                // we add the widges in stack on top of another with
-                // the current slide being at the top, them being transparent.
-                return Stack(
-                  children: [
-                    Opacity(
-                      opacity: _currentSlide.value == index - 1 ? 1 : 0,
-                      child: widget.slides[index - 1],
-                    ),
-                  ],
-                );
-              },
+          child: ColoredBox(
+            // show black color for extra space while presenting
+            color: Colors.black,
+            child: Center(
+              // TODO(immadisairaj): add more customizations for aspect ratios
+              child: AspectRatio(
+                aspectRatio: 16 / 9,
+                // TODO(immadisairaj): Try to scale content based on ratio
+                child: Stack(
+                  children: List<Widget>.generate(
+                    widget.slides.length + 2, // +2 for background and end slide
+                    (index) {
+                      // if the slide position is later to the current slide,
+                      // we return a blank widget to display nothing.
+                      if (index - 1 > _currentSlide.value) {
+                        return const SizedBox.shrink();
+                      }
+                      // show the end slide after all the slides (topmost)
+                      if (index - 1 == widget.slides.length) {
+                        // end of the presentation
+                        return const EndSlide(
+                          key: ValueKey('EndSlide'),
+                        );
+                      }
+                      // show the presentation background at
+                      // the bottom most in the stack
+                      if (index == 0) {
+                        return SizedBox.expand(child: widget.background);
+                      }
+                      // if slide position is before to the current slide,
+                      // we add the widges in stack on top of another with
+                      // the current slide being at the top, them being transparent.
+                      return Stack(
+                        children: [
+                          Opacity(
+                            opacity: _currentSlide.value == index - 1 ? 1 : 0,
+                            child: widget.slides[index - 1],
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+                ),
+              ),
             ),
           ),
         ),
