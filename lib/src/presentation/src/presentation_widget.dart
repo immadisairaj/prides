@@ -40,7 +40,7 @@ import 'package:prides/src/slide/widgets/end_slide.dart';
 ///
 /// Note3:  Text when the current slide number is displayed uses the 
 /// [TextTheme.labelLarge] style.
-
+///
 /// See also:
 /// * [SlideWidget], a widget that can be used to create a slide.
 /// The list of this widget is passed to [slides] in [PresentationWidget].
@@ -94,7 +94,7 @@ class _PresentationWidgetState extends State<PresentationWidget> {
   late FocusNode _focusNode;
 
   late SlideChangeData slideChangeData;
-  
+
   void _initialize() {
     _currentSlide = ValueNotifier(0);
     _focusNode = FocusNode();
@@ -230,8 +230,8 @@ class _PresentationWidgetState extends State<PresentationWidget> {
                     }
                     // if slide position is before to the current slide,
                     // we add the widges in stack on top of another with
-                    // the current slide being at the top, them being 
-                    // transparent
+                    // the current slide being at the top, 
+                    // rest being transparent.
                     return Opacity(
                       opacity: _currentSlide.value == index - 1 ? 1 : 0,
                       child: widget.slides[index - 1],
