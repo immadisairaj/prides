@@ -94,6 +94,7 @@ PresentationWidget(
     background: BackgroundWidget(),
 ),
 ```
+
 The background widget can be any widget from the flutter framework.
 For a single coloured background, you can simply use [`ColoredBox`](https://api.flutter.dev/flutter/widgets/ColoredBox-class.html).
 
@@ -104,7 +105,6 @@ PresentationWidget(
     showSlideNumber: true,
 ),
 ```
-
 
 ### SlideWidget
 

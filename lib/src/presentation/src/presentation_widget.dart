@@ -38,7 +38,7 @@ import 'package:prides/src/slide/widgets/end_slide.dart';
 /// is considered. And, when this widget doesn't have a background, the
 /// default flutter app background is displayed (white or black based on theme).
 ///
-/// Note3:  Text when the current slide number is displayed uses the 
+/// Note3:  Text when the current slide number is displayed uses the
 /// [TextTheme.labelLarge] style.
 ///
 /// See also:
@@ -230,7 +230,7 @@ class _PresentationWidgetState extends State<PresentationWidget> {
                     }
                     // if slide position is before to the current slide,
                     // we add the widges in stack on top of another with
-                    // the current slide being at the top, 
+                    // the current slide being at the top,
                     // rest being transparent.
                     return Opacity(
                       opacity: _currentSlide.value == index - 1 ? 1 : 0,
