@@ -22,8 +22,11 @@ void main() {
   }
 
   group('Navigate the default PresentationWidget with one slide -', () {
-    final presentationWidget =
-        PresentationWidget(slides: const [MockSlideWidget()]);
+    final presentationWidget = PresentationWidget(
+      slides: const [
+        MockSlideWidget(),
+      ],
+    );
     testWidgets('with tap events', (tester) async {
       await pumpApp(tester, presentationWidget);
 
@@ -37,7 +40,9 @@ void main() {
       expect(find.byType(EndSlide), findsNothing);
 
       // find the size of the widget needed to do the taps
-      final size = tester.getSize(find.byType(PresentationWidget));
+      final size = tester.getSize(
+        find.byType(PresentationWidget),
+      );
       final leftOffset = Offset(size.width / 4, size.height / 2);
       final rightOffset = Offset(size.width * 3 / 4, size.height / 2);
 
@@ -181,7 +186,9 @@ void main() {
       (tester) async {
     const backgroundKey = Key('backgroundWidget');
     final presentationWidget = PresentationWidget(
-      slides: const [MockSlideWidgetNoBackground()],
+      slides: const [
+        MockSlideWidgetNoBackground(),
+      ],
       background: Container(
         key: backgroundKey,
         color: Colors.blue,
@@ -194,12 +201,11 @@ void main() {
     expect(find.byKey(backgroundKey), findsOneWidget);
   });
 
-  testWidgets(
-      'Display the slide number when set to true',
-      (tester) async {
-    // const backgroundKey = Key('backgroundWidget');
+  testWidgets('Display the slide number when set to true', (tester) async {
     final presentationWidget = PresentationWidget(
-      slides: const [MockSlideWidgetNoBackground()],
+      slides: const [
+        MockSlideWidgetNoBackground(),
+      ],
       showSlideNumber: true,
     );
     await pumpApp(tester, presentationWidget);
@@ -212,7 +218,10 @@ void main() {
     'Navigate the PresentationWidget when a slide is having controller',
     (tester) async {
       final presentationWidget = PresentationWidget(
-        slides: [const MockSlideWidget(), MockSlideWidgetWithController()],
+        slides: [
+          const MockSlideWidget(),
+          MockSlideWidgetWithController(),
+        ],
       );
       await pumpApp(tester, presentationWidget);
 
@@ -220,7 +229,9 @@ void main() {
       expect(find.byType(MockSlideWidgetWithController), findsNothing);
 
       // advance - go to the second slide
-      await tester.tap(find.byType(PresentationWidget));
+      await tester.tap(
+        find.byType(PresentationWidget),
+      );
       await tester.pumpAndSettle();
 
       // Expect: controller slide
@@ -229,14 +240,18 @@ void main() {
       expect(find.byType(EndSlide), findsNothing);
 
       // advance
-      await tester.tap(find.byType(PresentationWidget));
+      await tester.tap(
+        find.byType(PresentationWidget),
+      );
       await tester.pumpAndSettle();
 
       // Expect: not an end slide as it holds the slide for one time
       expect(find.byType(EndSlide), findsNothing);
 
       // advance
-      await tester.tap(find.byType(PresentationWidget));
+      await tester.tap(
+        find.byType(PresentationWidget),
+      );
       await tester.pumpAndSettle();
 
       // Expect: and end slide as now it will move to the next
@@ -244,7 +259,9 @@ void main() {
 
       // reverse
       await tester.tapAt(
-        tester.getTopLeft(find.byType(PresentationWidget)) +
+        tester.getTopLeft(
+              find.byType(PresentationWidget),
+            ) +
             const Offset(10, 10),
       );
       await tester.pumpAndSettle();
@@ -256,7 +273,9 @@ void main() {
 
       // reverse
       await tester.tapAt(
-        tester.getTopLeft(find.byType(PresentationWidget)) +
+        tester.getTopLeft(
+              find.byType(PresentationWidget),
+            ) +
             const Offset(10, 10),
       );
       await tester.pumpAndSettle();
@@ -266,7 +285,9 @@ void main() {
 
       // reverse
       await tester.tapAt(
-        tester.getTopLeft(find.byType(PresentationWidget)) +
+        tester.getTopLeft(
+              find.byType(PresentationWidget),
+            ) +
             const Offset(10, 10),
       );
       await tester.pumpAndSettle();
@@ -312,7 +333,10 @@ void main() {
       late int currentSlide;
       late int previousSlide;
       final presentationWidget = PresentationWidget(
-        slides: const [MockSlideWidget(), MockSlideWidget()],
+        slides: const [
+          MockSlideWidget(),
+          MockSlideWidget(),
+        ],
         onSlideChange: (value) {
           currentSlide = value.slide;
           previousSlide = value.previousSlide!;
@@ -321,7 +345,9 @@ void main() {
       await pumpApp(tester, presentationWidget);
 
       // advance - go to the second slide
-      await tester.tap(find.byType(PresentationWidget));
+      await tester.tap(
+        find.byType(PresentationWidget),
+      );
       await tester.pumpAndSettle();
 
       // Expect the current slide and previous slide
