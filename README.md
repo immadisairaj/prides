@@ -98,6 +98,14 @@ PresentationWidget(
 The background widget can be any widget from the flutter framework.
 For a single coloured background, you can simply use [`ColoredBox`](https://api.flutter.dev/flutter/widgets/ColoredBox-class.html).
 
+We can even view the current slide number:
+```dart
+PresentationWidget(
+    slides: slideList, // required
+    showSlideNumber: true,
+),
+```
+
 ### SlideWidget
 
 It is an abstract class exposed from this package. Extend and implement this class to use in the `PresentationWidget`.
