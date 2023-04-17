@@ -80,6 +80,7 @@ class PresentationWidget extends StatefulWidget {
   /// ),
   /// ```
   final ValueChanged<SlideChangeData>? onSlideChange;
+  
   @override
   State<PresentationWidget> createState() => _PresentationWidgetState();
 }
