@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:prides/prides.dart';
+
 import './content/content.dart';
 
 class MyApp extends StatelessWidget {
@@ -31,6 +32,7 @@ class MyHomePage extends StatelessWidget {
           debugPrint('currentSlide: ${data.slide}, '
               'previousSlide: ${data.previousSlide}');
         },
+        slideSize: SlideSize.widescreenSmall,
         slides: [
           const CustomTitleSlide(), // slide in content/title_slide.dart
           const TitleSlide(

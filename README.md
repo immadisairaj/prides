@@ -106,6 +106,22 @@ PresentationWidget(
 ),
 ```
 
+We can customize resolution of slides:
+```dart
+PresentationWidget(
+    slides: slideList, // required
+    slideSize: SlideSize.standardBig, // 4:3 aspect ratio (16:9 is default when not specified)
+),
+```
+
+We can specify how slides fits inside the widget:
+```dart
+PresentationWidget(
+    slides: slideList, // required
+    slideFit: BoxFit.fill, // defaults to BoxFit.cover when not specified
+),
+```
+
 ### SlideWidget
 
 It is an abstract class exposed from this package. Extend and implement this class to use in the `PresentationWidget`.
