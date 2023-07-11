@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:prides/prides.dart';
-
 import 'package:prides/src/slide/widgets/end_slide.dart';
 
 /// A widget that can present the slides.
@@ -11,6 +10,11 @@ import 'package:prides/src/slide/widgets/end_slide.dart';
 /// to [background] that is displayed when a slide doesn't have
 /// a background. This enables use of a common background all over
 /// the presentation.
+///
+/// By default, the widget makes the [slides] resolution to
+/// [SlideSize.widescreenBig] (1920x1080). The [slideSize] can be used to
+/// set preferred resolution. Also, packaged along with this comes an option
+/// on how to fit the slide in this widget using [slideFit].
 ///
 /// It is best to use a [Material] widget as a parent of this widget.
 /// And always use this widget inside a [MaterialApp].
@@ -49,7 +53,8 @@ class PresentationWidget extends StatefulWidget {
     super.key,
     this.background,
     this.onSlideChange,
-    // Todo(immadisairaj): try to add an option for ratio, free size
+    this.slideSize = SlideSize.widescreenBig,
+    this.slideFit = BoxFit.contain,
   }) : assert(slides.length > 0, 'slides cannot be empty');
 
   /// The list of slides made from or using [SlideWidget] to present.
@@ -73,6 +78,12 @@ class PresentationWidget extends StatefulWidget {
   /// ),
   /// ```
   final ValueChanged<SlideChangeData>? onSlideChange;
+
+  /// Resolution of slide in the presentation widget.
+  final SlideSize slideSize;
+
+  /// How to inscribe the slide into the space allocated during layout.
+  final BoxFit slideFit;
 
   @override
   State<PresentationWidget> createState() => _PresentationWidgetState();
@@ -204,11 +215,11 @@ class _PresentationWidgetState extends State<PresentationWidget> {
           child: ColoredBox(
             // show black color for extra space while presenting
             color: Colors.black,
-            child: Center(
-              // TODO(immadisairaj): add more customizations for aspect ratios
-              child: AspectRatio(
-                aspectRatio: 16 / 9,
-                // TODO(immadisairaj): Try to scale content based on ratio
+            child: FittedBox(
+              fit: widget.slideFit,
+              child: SizedBox(
+                width: widget.slideSize.width + 0.0,
+                height: widget.slideSize.height + 0.0,
                 child: Stack(
                   children: List<Widget>.generate(
                     widget.slides.length + 2, // +2 for background and end slide
