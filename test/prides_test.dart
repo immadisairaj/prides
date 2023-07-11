@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-
 import 'package:prides/prides.dart';
 import 'package:prides/src/slide/widgets/end_slide.dart';
 
@@ -327,4 +326,79 @@ void main() {
       expect(previousSlide, 1);
     },
   );
+
+  testWidgets('slide size in presentation widget', (tester) async {
+    const slideKey = Key('slideOne');
+    const slide = MockSlideWidget(key: slideKey);
+    final presentationWidget = PresentationWidget(
+      slides: const [slide],
+    );
+    await pumpApp(tester, presentationWidget);
+
+    // Expect the slide having defualt size resolution of 1080p
+    final parentSizedBox = find.ancestor(
+      of: find.byWidget(slide),
+      matching: find.byType(SizedBox),
+    );
+    expect(
+      tester.widget<SizedBox>(parentSizedBox).width,
+      SlideSize.widescreenBig.width,
+    );
+    expect(
+      tester.widget<SizedBox>(parentSizedBox).height,
+      SlideSize.widescreenBig.height,
+    );
+  });
+
+  testWidgets('custom slide size in presentation widget', (tester) async {
+    const slideKey = Key('slideOne');
+    const slide = MockSlideWidget(key: slideKey);
+    const slideSize = SlideSize(width: 900, height: 900);
+    final presentationWidget = PresentationWidget(
+      slides: const [slide],
+      slideSize: slideSize,
+    );
+    await pumpApp(tester, presentationWidget);
+
+    // Expect the slide having defualt size resolution of 1080p
+    final parentSizedBox = find.ancestor(
+      of: find.byWidget(slide),
+      matching: find.byType(SizedBox),
+    );
+    expect(tester.widget<SizedBox>(parentSizedBox).width, slideSize.width);
+    expect(tester.widget<SizedBox>(parentSizedBox).height, slideSize.height);
+  });
+
+  testWidgets('slide fit in presentation widget', (tester) async {
+    const slideKey = Key('slideOne');
+    const slide = MockSlideWidget(key: slideKey);
+    final presentationWidget = PresentationWidget(
+      slides: const [slide],
+    );
+    await pumpApp(tester, presentationWidget);
+
+    // Expect the slide having defualt fit of BoxFit.contain
+    final parentFittedBox = find.ancestor(
+      of: find.byWidget(slide),
+      matching: find.byType(FittedBox),
+    );
+    expect(tester.widget<FittedBox>(parentFittedBox).fit, BoxFit.contain);
+  });
+
+  testWidgets('custom slide fit in presentation widget', (tester) async {
+    const slideKey = Key('slideOne');
+    const slide = MockSlideWidget(key: slideKey);
+    final presentationWidget = PresentationWidget(
+      slides: const [slide],
+      slideFit: BoxFit.fill,
+    );
+    await pumpApp(tester, presentationWidget);
+
+    // Expect the slide having defualt fit of BoxFit.contain
+    final parentFittedBox = find.ancestor(
+      of: find.byWidget(slide),
+      matching: find.byType(FittedBox),
+    );
+    expect(tester.widget<FittedBox>(parentFittedBox).fit, BoxFit.fill);
+  });
 }
