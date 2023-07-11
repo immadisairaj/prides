@@ -230,52 +230,53 @@ class _PresentationWidgetState extends State<PresentationWidget> {
                 height: widget.slideSize.height + 0.0,
                 child: Stack(
                   children: List<Widget>.generate(
-                    widget.slides.length + 2, // +2 for background and end slide
-                    (index) {
-                      // if the slide position is later to the current slide,
-                      // we return a blank widget to display nothing.
-                      if (index - 1 > _currentSlide.value) {
-                        return const SizedBox.shrink();
-                      }
-                      // show the end slide after all the slides (topmost)
-                      if (index - 1 == widget.slides.length) {
-                        // end of the presentation
-                        return const EndSlide(
-                          key: ValueKey('EndSlide'),
-                        );
-                      }
-                      // show the presentation background at
-                      // the bottom most in the stack
-                      if (index == 0) {
-                        return SizedBox.expand(child: widget.background);
-                      }
-                      // if slide position is before to the current slide,
-                      // we add the widges in stack on top of another with
-                      // the current slide being at the top,
-                      // rest being transparent.
-                      return Opacity(
-                        opacity: _currentSlide.value == index - 1 ? 1 : 0,
-                        child: widget.slides[index - 1],
-                      );
-                    },
-                  ) +
-                // show the current slide number when is to true
-                // and the current slide is not the end slide
-                // Adding it to the stack so that it is always on top
-                [
-                  if (widget.showSlideNumber &&
-                      _currentSlide.value < widget.slides.length)
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Padding(
-                        padding: const EdgeInsets.only(bottom: 20),
-                        child: Text(
-                          '${_currentSlide.value + 1}',
-                          style: Theme.of(context).textTheme.labelLarge,
-                        ),
-                      ),
-                    ),
-                ],
+                        widget.slides.length +
+                            2, // +2 for background and end slide
+                        (index) {
+                          // if the slide position is later to the current
+                          // slide, we return a blank widget to display nothing.
+                          if (index - 1 > _currentSlide.value) {
+                            return const SizedBox.shrink();
+                          }
+                          // show the end slide after all the slides (topmost)
+                          if (index - 1 == widget.slides.length) {
+                            // end of the presentation
+                            return const EndSlide(
+                              key: ValueKey('EndSlide'),
+                            );
+                          }
+                          // show the presentation background at
+                          // the bottom most in the stack
+                          if (index == 0) {
+                            return SizedBox.expand(child: widget.background);
+                          }
+                          // if slide position is before to the current slide,
+                          // we add the widges in stack on top of another with
+                          // the current slide being at the top,
+                          // rest being transparent.
+                          return Opacity(
+                            opacity: _currentSlide.value == index - 1 ? 1 : 0,
+                            child: widget.slides[index - 1],
+                          );
+                        },
+                      ) +
+                      // show the current slide number when is to true
+                      // and the current slide is not the end slide
+                      // Adding it to the stack so that it is always on top
+                      [
+                        if (widget.showSlideNumber &&
+                            _currentSlide.value < widget.slides.length)
+                          Align(
+                            alignment: Alignment.bottomCenter,
+                            child: Padding(
+                              padding: const EdgeInsets.only(bottom: 20),
+                              child: Text(
+                                '${_currentSlide.value + 1}',
+                                style: Theme.of(context).textTheme.labelLarge,
+                              ),
+                            ),
+                          ),
+                      ],
                 ),
               ),
             ),
