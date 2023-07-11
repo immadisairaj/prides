@@ -32,7 +32,8 @@ class MyHomePage extends StatelessWidget {
           debugPrint('currentSlide: ${data.slide}, '
               'previousSlide: ${data.previousSlide}');
         },
-        slideSize: SlideSize.widescreenSmall,
+        slideSize: SlideSize.widescreenBig,
+        slideFit: BoxFit.contain,
         slides: [
           const CustomTitleSlide(), // slide in content/title_slide.dart
           const TitleSlide(
