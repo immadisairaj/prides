@@ -10,6 +10,7 @@ import 'package:prides/src/slide/widgets/end_slide.dart';
 /// to [background] that is displayed when a slide doesn't have
 /// a background. This enables use of a common background all over
 /// the presentation.
+/// To show the current slide number, set the [showSlideNumber] to true.
 ///
 /// By default, the widget makes the [slides] resolution to
 /// [SlideSize.widescreenBig] (1920x1080). The [slideSize] can be used to
@@ -41,6 +42,9 @@ import 'package:prides/src/slide/widgets/end_slide.dart';
 /// is considered. And, when this widget doesn't have a background, the
 /// default flutter app background is displayed (white or black based on theme).
 ///
+/// Note3:  Text when the current slide number is displayed uses the
+/// [TextTheme.labelLarge] style.
+///
 /// See also:
 /// * [SlideWidget], a widget that can be used to create a slide.
 /// The list of this widget is passed to [slides] in [PresentationWidget].
@@ -52,6 +56,7 @@ class PresentationWidget extends StatefulWidget {
     required this.slides,
     super.key,
     this.background,
+    this.showSlideNumber = false,
     this.onSlideChange,
     this.slideSize = SlideSize.widescreenBig,
     this.slideFit = BoxFit.contain,
@@ -59,6 +64,9 @@ class PresentationWidget extends StatefulWidget {
 
   /// The list of slides made from or using [SlideWidget] to present.
   final List<SlideWidget> slides;
+
+  /// Show the current slide number when set to true
+  final bool showSlideNumber;
 
   /// The background widget for the presentation.
   /// It will displayed when a slide doesn't have a background.
@@ -250,7 +258,24 @@ class _PresentationWidgetState extends State<PresentationWidget> {
                         child: widget.slides[index - 1],
                       );
                     },
-                  ),
+                  ) +
+                // show the current slide number when is to true
+                // and the current slide is not the end slide
+                // Adding it to the stack so that it is always on top
+                [
+                  if (widget.showSlideNumber &&
+                      _currentSlide.value < widget.slides.length)
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 20),
+                        child: Text(
+                          '${_currentSlide.value + 1}',
+                          style: Theme.of(context).textTheme.labelLarge,
+                        ),
+                      ),
+                    ),
+                ],
                 ),
               ),
             ),

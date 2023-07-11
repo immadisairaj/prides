@@ -22,8 +22,9 @@ void main() {
   }
 
   group('Navigate the default PresentationWidget with one slide -', () {
-    final presentationWidget =
-        PresentationWidget(slides: const [MockSlideWidget()]);
+    final presentationWidget = PresentationWidget(
+      slides: const [MockSlideWidget()],
+    );
     testWidgets('with tap events', (tester) async {
       await pumpApp(tester, presentationWidget);
 
@@ -192,6 +193,17 @@ void main() {
     // Expect: a background widget passed to presentation widget when
     // the slide has no background
     expect(find.byKey(backgroundKey), findsOneWidget);
+  });
+
+  testWidgets('Display the slide number when set to true', (tester) async {
+    final presentationWidget = PresentationWidget(
+      slides: const [MockSlideWidgetNoBackground()],
+      showSlideNumber: true,
+    );
+    await pumpApp(tester, presentationWidget);
+
+    // Expect: a slide number widget
+    expect(find.text('1'), findsOneWidget);
   });
 
   testWidgets(
