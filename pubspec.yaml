@@ -15,7 +15,7 @@ dependencies:
   
   # This is a package from dart.dev that contains annotations like
   # @internal that is used by the Flutter tool to analyze code.
-  meta: ^1.8.0
+  meta: ^1.9.1
 
 dev_dependencies:
   flutter_test:
@@ -23,4 +23,4 @@ dev_dependencies:
 
   # This package is from very good ventures that contains lints
   # for some good practices while writing code.
-  very_good_analysis: ^4.0.0
+  very_good_analysis: ^5.0.0
