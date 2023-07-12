@@ -1,3 +1,10 @@
+## 0.0.2
+
+- Addition of `CaptionSlide`.
+- Can now add a function that callsback on a slide change. Use `onSlideChange`.
+- Add an option to show current slide number using `showSlideNumber`.
+- Slides in `PresentationWidget` will now be sized to a pre set resolution and scales accordingly to window size. To change resolution use `slideSize` and packaged with it, use `slideFit` to specify how slide fits in the screen.
+
 ## 0.0.1
 
 - Initial public release.
