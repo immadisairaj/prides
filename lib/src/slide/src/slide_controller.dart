@@ -145,7 +145,7 @@ abstract class SlideControllerListener {
   /// return:
   /// - true, to stop the advance slide event.
   /// - false, to continue the advance slide event.
-  // @mustBeOverridden
+  @mustBeOverridden
   bool onAdvanceSlide();
 
   /// Override this method to handle the reverse slide event.
@@ -153,6 +153,6 @@ abstract class SlideControllerListener {
   /// return:
   /// - true, to stop the reverse slide event.
   /// - false, to continue the reverse slide event.
-  // @mustBeOverridden
+  @mustBeOverridden
   bool onReverseSlide();
 }
