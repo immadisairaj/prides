@@ -21,6 +21,9 @@
 </p>
 <br>
 
+> [!Note]
+> I am not updating this package anymore. Because, 1. I am not finding time to continue working on this. 2. No one is using this anyway. 3. There is another package that overtook and went ahead, used by many and has all that is in here. So, I suggest if you are looking for something, you should check out [flutter_deck](https://pub.dev/packages/flutter_deck).
+
 Use this package to build your presentations with Flutter with ease. Use the pre-built slide widgets or create your custom slide with custom controls and present them by adding the `PresentationWidget` (provided in this package) to the application tree.
 
 ![Example Slides](https://raw.githubusercontent.com/immadisairaj/prides/main/assets/hello_prides.png)

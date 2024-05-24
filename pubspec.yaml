@@ -1,6 +1,6 @@
 name: prides
 description: A package that helps in creating custom Slides and Presenting them.
-version: 0.0.2
+version: 0.0.2+1
 # homepage:
 repository: https://github.com/immadisairaj/prides
 issue_tracker: https://github.com/immadisairaj/prides/issues

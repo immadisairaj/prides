@@ -1,3 +1,7 @@
+## 0.0.2+1
+
+- Add a note to Readme
+
 ## 0.0.2
 
 - Addition of `CaptionSlide`.
